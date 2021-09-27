@@ -3,7 +3,9 @@ package loger
 import (
 	// "errors"
 	"fmt"
-	// "strings"
+	"io"
+	"os"
+	"runtime"
 	"time"
 )
 
@@ -18,7 +20,15 @@ const (
 )
 
 type Loger struct {
-	Level LogLevel
+	// 设置等级则输出对应等级日志
+	// 例如:
+	// log := loger.NewLoger()
+	// log.Level = loger.WARNING
+	// 输出高于warning的日志
+	Level  LogLevel  //设置打印日志等级
+	ToFile bool      //是否写入文件
+	OutPut io.Writer //终端打印 os.Stdout  或输入文件
+	FileLoger
 }
 
 func NewLoger() *Loger {
@@ -30,51 +40,49 @@ func GetFotmatTime() string {
 	return now.Format("2006-01-02 15:04:05")
 }
 
-// func ParseLogLevel(s string) (LogLevel, error) {
-// 	s = strings.ToLower(s)
-// 	switch s {
-// 	case "debug":
-// 		return DEBUG, nil
-// 	case "info":
-// 		return INFO, nil
-// 	case "warning":
-// 		return WARNING, nil
-// 	case "error":
-// 		return ERROR, nil
-// 	case "fatal":
-// 		return FATAL, nil
-// 	default:
-// 		err := errors.New("unknown log level, default log level warning")
-// 		return WARNING, err
-// 	}
-// }
+func getLogDetails() (funcName, file string, line int) {
+	pc, file, line, ok := runtime.Caller(3)
+	if !ok {
+		fmt.Println("Runtime.caller faild ")
+		return
+	}
 
-func (l *Loger) Debug(str string) {
-	if l.Level <= DEBUG {
-		fmt.Printf("[%s] [DEBUG] %s\n", GetFotmatTime(), str)
+	funcName = runtime.FuncForPC(pc).Name()
+	return
+}
+
+func (l *Loger) log(logLevel LogLevel, msg string, a ...interface{}) {
+	msg = fmt.Sprintf(msg, a...)
+	funcName, fileName, line := getLogDetails()
+
+	if l.ToFile {
+		l.OutPut = l.FileLoger.fileObj
+		l.FileLoger.NewFileLoger()
+	} else {
+		l.OutPut = os.Stdout
+	}
+	if l.Level <= logLevel {
+		fmt.Fprintf(l.OutPut, "[%s] [%s] [%s:%s:%d] %s\n", GetFotmatTime(), ParseLogLevel(logLevel), funcName, fileName, line, msg)
+
 	}
 }
 
-func (l *Loger) Info(str string) {
-	if l.Level <= INFO {
-		fmt.Printf("[%s] [Info] %s\n", GetFotmatTime(), str)
-	}
+func (l *Loger) Debug(msg string, a ...interface{}) {
+	l.log(DEBUG, msg, a...)
 }
 
-func (l *Loger) Warning(str string) {
-	if l.Level <= WARNING {
-		fmt.Printf("[%s] [Warning] %s\n", GetFotmatTime(), str)
-	}
+func (l *Loger) Info(msg string, a ...interface{}) {
+	l.log(INFO, msg, a...)
 }
 
-func (l *Loger) Error(str string) {
-	if l.Level <= ERROR {
-		fmt.Printf("[%s] [Error] %s\n", GetFotmatTime(), str)
-	}
+func (l *Loger) Warning(msg string, a ...interface{}) {
+	l.log(WARNING, msg, a...)
 }
 
-func (l *Loger) Fatal(str string) {
-	if l.Level <= FATAL {
-		fmt.Printf("[%s] [Fatal] %s\n", GetFotmatTime(), str)
-	}
+func (l *Loger) Error(msg string, a ...interface{}) {
+	l.log(ERROR, msg, a...)
+}
+
+func (l *Loger) Fatal(msg string, a ...interface{}) {
+	l.log(FATAL, msg, a...)
 }

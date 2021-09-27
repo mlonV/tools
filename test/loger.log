@@ -1,0 +1,24 @@
+[2021-09-27 17:19:51] [INFO] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:27] 一个 Info
+[2021-09-27 17:19:51] [ERROR] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:28] 一个 Error id = 100 , name = test
+[2021-09-27 17:19:51] [FATAL] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:29] 一个 fatal
+[2021-09-27 17:19:51] [WARNING] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:30] 一个 warning
+[2021-09-27 17:19:53] [DEBUG] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:26] 一个 debug id = 100 , name = test
+[2021-09-27 17:19:53] [INFO] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:27] 一个 Info
+[2021-09-27 17:19:53] [ERROR] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:28] 一个 Error id = 100 , name = test
+[2021-09-27 17:19:53] [FATAL] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:29] 一个 fatal
+[2021-09-27 17:19:53] [WARNING] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:30] 一个 warning
+[2021-09-27 17:19:56] [DEBUG] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:26] 一个 debug id = 100 , name = test
+[2021-09-27 17:19:56] [INFO] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:27] 一个 Info
+[2021-09-27 17:19:56] [ERROR] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:28] 一个 Error id = 100 , name = test
+[2021-09-27 17:19:56] [FATAL] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:29] 一个 fatal
+[2021-09-27 17:19:56] [WARNING] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:30] 一个 warning
+[2021-09-27 17:19:58] [DEBUG] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:26] 一个 debug id = 100 , name = test
+[2021-09-27 17:19:58] [INFO] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:27] 一个 Info
+[2021-09-27 17:19:58] [ERROR] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:28] 一个 Error id = 100 , name = test
+[2021-09-27 17:19:58] [FATAL] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:29] 一个 fatal
+[2021-09-27 17:19:58] [WARNING] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:30] 一个 warning
+[2021-09-27 17:20:00] [DEBUG] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:26] 一个 debug id = 100 , name = test
+[2021-09-27 17:20:00] [INFO] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:27] 一个 Info
+[2021-09-27 17:20:00] [ERROR] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:28] 一个 Error id = 100 , name = test
+[2021-09-27 17:20:00] [FATAL] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:29] 一个 fatal
+[2021-09-27 17:20:00] [WARNING] [main.main:/Users/apple/Desktop/go_dev/tools/main.go:30] 一个 warning
