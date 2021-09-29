@@ -56,8 +56,7 @@ func (l *Loger) log(logLevel LogLevel, msg string, a ...interface{}) {
 	funcName, fileName, line := getLogDetails()
 
 	if l.ToFile {
-		l.OutPut = l.FileLoger.fileObj
-		l.FileLoger.NewFileLoger()
+		l.OutPut = l.FileLoger.WriteFileLoger()
 	} else {
 		l.OutPut = os.Stdout
 	}
