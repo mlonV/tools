@@ -25,9 +25,10 @@ type Loger struct {
 	// log := loger.NewLoger()
 	// log.Level = loger.WARNING
 	// 输出高于warning的日志
-	Level  LogLevel  //设置打印日志等级
-	ToFile bool      //是否写入文件
-	OutPut io.Writer //终端打印 os.Stdout  或输入文件
+	Level           LogLevel  //设置打印日志等级
+	ToFile          bool      //是否写入文件
+	OutPut          io.Writer //终端打印 os.Stdout  或输入文件
+	WithFuncAndFile bool      // 输出的时候是否带函数和文件行数
 	FileLoger
 }
 
@@ -60,9 +61,10 @@ func (l *Loger) log(logLevel LogLevel, msg string, a ...interface{}) {
 	} else {
 		l.OutPut = os.Stdout
 	}
-	if l.Level <= logLevel {
+	if l.WithFuncAndFile {
 		fmt.Fprintf(l.OutPut, "[%s] [%s] [%s:%s:%d] %s\n", GetFotmatTime(), ParseLogLevel(logLevel), funcName, fileName, line, msg)
-
+	} else {
+		fmt.Fprintf(l.OutPut, "[%s] [%s] %s\n", GetFotmatTime(), ParseLogLevel(logLevel), msg)
 	}
 }
 
