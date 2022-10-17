@@ -17,10 +17,12 @@ type FileLoger struct {
 func (f *FileLoger) WriteFileLoger() *os.File {
 	fullFilePath := path.Join(f.FilePath, f.FileName)
 	//
-	var file *os.File = f.GetFileObj(fullFilePath)
+	if f.fileObj == nil {
+		f.fileObj = f.GetFileObj(fullFilePath)
+	}
 
 	// 获取当前文件大小
-	fi, err := file.Stat()
+	fi, err := f.fileObj.Stat()
 	if err != nil || fi == nil {
 		// 获取不到状态直接panic
 		panic(fmt.Sprintf("get file stat failed err : %v ,obj : %v", err, fi))
@@ -29,9 +31,10 @@ func (f *FileLoger) WriteFileLoger() *os.File {
 	// 若超过指定大小，则文件重命名。
 	if fi.Size() > f.FileMaxSize {
 		f.RenameFile(fullFilePath)
-		return f.GetFileObj(fullFilePath)
+		f.fileObj = f.GetFileObj(fullFilePath)
+		return f.fileObj
 	}
-	return file
+	return f.fileObj
 
 }
 
@@ -47,4 +50,5 @@ func (f *FileLoger) GetFileObj(fullFilePath string) *os.File {
 func (f *FileLoger) RenameFile(fullFilePath string) {
 	// fmt.Println(time.Now().Format("200601021504"), fullFilePath)
 	os.Rename(fullFilePath, fullFilePath+"-"+time.Now().Format("20060102150405"))
+	f.fileObj.Close()
 }
