@@ -32,8 +32,17 @@ type Loger struct {
 	FileLoger
 }
 
-func NewLoger() *Loger {
-	return &Loger{}
+func NewLoger(l *Loger) *Loger {
+
+	// 如果写入文件
+	if l.ToFile {
+		if l.FileSaveNum != 0 {
+			l.FC = make(chan string, l.FileSaveNum)
+		} else {
+			l.FC = nil
+		}
+	}
+	return l
 }
 
 func GetFotmatTime() string {

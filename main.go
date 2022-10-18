@@ -12,14 +12,17 @@ func main() {
 	// log.ToFile = true
 
 	// 分割线
-	log := loger.NewLoger()
-	fileLogObj := loger.FileLoger{
-		FileName:    "loger.log",
-		FilePath:    "/Users/apple/Desktop/go_dev/tools/test",
-		FileMaxSize: 10 * 1024,
-	}
-	log.FileLoger = fileLogObj
-	log.ToFile = true
+	log := loger.NewLoger(
+		&loger.Loger{
+			ToFile: true,
+			FileLoger: loger.FileLoger{
+				FileName:    "loger.log",
+				FilePath:    "./logs/",
+				FileMaxSize: 1024,
+				FileSaveNum: 5,
+			},
+		},
+	)
 
 	for {
 		id := 100
