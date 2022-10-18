@@ -87,3 +87,8 @@ func (l *Loger) Error(msg string, a ...interface{}) {
 func (l *Loger) Fatal(msg string, a ...interface{}) {
 	l.log(FATAL, msg, a...)
 }
+
+// 给ES用的接口
+func (l *Loger) Printf(msg string, a ...interface{}) {
+	l.log(ERROR, msg, a...)
+}
