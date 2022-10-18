@@ -61,10 +61,13 @@ func (l *Loger) log(logLevel LogLevel, msg string, a ...interface{}) {
 	} else {
 		l.OutPut = os.Stdout
 	}
-	if l.WithFuncAndFile {
-		fmt.Fprintf(l.OutPut, "[%s] [%s] [%s:%s:%d] %s\n", GetFotmatTime(), ParseLogLevel(logLevel), funcName, fileName, line, msg)
-	} else {
-		fmt.Fprintf(l.OutPut, "[%s] [%s] %s\n", GetFotmatTime(), ParseLogLevel(logLevel), msg)
+	if l.Level <= logLevel {
+		// 是否输出带有函数名和文件名格式的日志
+		if l.WithFuncAndFile {
+			fmt.Fprintf(l.OutPut, "[%s] [%s] [%s:%s:%d] %s\n", GetFotmatTime(), ParseLogLevel(logLevel), funcName, fileName, line, msg)
+		} else {
+			fmt.Fprintf(l.OutPut, "[%s] [%s] %s\n", GetFotmatTime(), ParseLogLevel(logLevel), msg)
+		}
 	}
 }
 
