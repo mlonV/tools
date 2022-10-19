@@ -68,15 +68,12 @@ func (f *FileLoger) RenameFile(fullFilePath string) {
 
 // 把老的文件加入到FC
 func (f *FileLoger) AddOldFileToFC() {
-	println("1", len(f.FC), cap(f.FC))
 	de, err := os.ReadDir(f.FilePath)
 	if err != nil {
 		panic(err)
 	}
-	println("2", len(f.FC), cap(f.FC))
 	for _, v := range de {
 		oldFile := strings.Split(v.Name(), "-")[0]
-		println("2.2", len(f.FC), cap(f.FC), oldFile, v.Name())
 		if oldFile == f.FileName {
 			if len(f.FC) >= int(f.FileSaveNum) {
 				f.DeleteFile()
@@ -85,8 +82,6 @@ func (f *FileLoger) AddOldFileToFC() {
 
 		}
 	}
-	println("3", len(f.FC), cap(f.FC))
-
 }
 
 // 获取文件的绝对路径
