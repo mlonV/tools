@@ -93,7 +93,6 @@ func (f *FileLoger) DeleteFile() {
 
 	if len(f.FC) >= int(f.FileSaveNum) {
 		file := <-f.FC
-		println("2.3", len(f.FC), cap(f.FC), file)
 		os.Remove(file)
 	}
 
