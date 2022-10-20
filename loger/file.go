@@ -50,7 +50,7 @@ func (f *FileLoger) WriteFileLoger() *os.File {
 }
 
 func (f *FileLoger) GetFileObj(fullFilePath string) *os.File {
-	file, err := os.OpenFile(fullFilePath, os.O_APPEND|os.O_CREATE|os.O_RDWR, 0644)
+	file, err := os.OpenFile(fullFilePath, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0644)
 	if err != nil {
 		panic(err)
 	}
@@ -73,6 +73,9 @@ func (f *FileLoger) AddOldFileToFC() {
 		panic(err)
 	}
 	for _, v := range de {
+		if v.Name() == f.FileName {
+			continue
+		}
 		oldFile := strings.Split(v.Name(), "-")[0]
 		if oldFile == f.FileName {
 			if len(f.FC) >= int(f.FileSaveNum) {
@@ -90,7 +93,6 @@ func (f *FileLoger) GetFullFilePath() string {
 }
 
 func (f *FileLoger) DeleteFile() {
-
 	if len(f.FC) >= int(f.FileSaveNum) {
 		file := <-f.FC
 		os.Remove(file)

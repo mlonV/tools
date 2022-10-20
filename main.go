@@ -18,7 +18,7 @@ func main() {
 			FileLoger: loger.FileLoger{
 				FileName:    "loger.log",
 				FilePath:    "./logs/",
-				FileMaxSize: 1024,
+				FileMaxSize: 2048,
 				FileSaveNum: 5,
 			},
 		},
