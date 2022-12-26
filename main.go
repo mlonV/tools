@@ -14,7 +14,9 @@ func main() {
 	// 分割线
 	log := loger.NewLoger(
 		&loger.Loger{
-			ToFile: true,
+			ToFile:          true,
+			WithFuncAndFile: false,
+			Level:           2,
 			FileLoger: loger.FileLoger{
 				FileName:    "loger.log",
 				FilePath:    "./logs/",
