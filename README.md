@@ -1,11 +1,14 @@
 # tools
+	// 分割线
 	log := loger.NewLoger(
 		&loger.Loger{
-			ToFile: true,
+			ToFile:          true,
+			WithFuncAndFile: false,
+			Level:           2,
 			FileLoger: loger.FileLoger{
 				FileName:    "loger.log",
 				FilePath:    "./logs/",
-				FileMaxSize: 1024,
+				FileMaxSize: 2048,
 				FileSaveNum: 5,
 			},
 		},
